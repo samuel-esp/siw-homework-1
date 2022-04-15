@@ -4,7 +4,7 @@ import model.Product;
 
 import javax.persistence.*;
 
-public class ProductMain {
+public class Main {
 
     public static void main(String[] args) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("products-unit");
