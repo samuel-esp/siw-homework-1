@@ -24,7 +24,9 @@ public class Allievo {
 
     private String email;
 
-    @OneToOne
+    //Fetch Type Eager, l'azienda la voglio subito, Cascade Persist e Remove dato che azienda fa parte della composizione
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    @JoinColumn
     private Azienda azienda;
 
     @ManyToMany

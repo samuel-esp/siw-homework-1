@@ -22,8 +22,9 @@ public class Docente {
 
     private Integer partitaIva;
 
-    @OneToMany(mappedBy = "docente")
-    private List<Corso> corso;
+    //FetchType Eager i corsi li voglio subito
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "docente")
+    private List<Corso> corso = new java.util.ArrayList<>();
 
     public Docente() {
     }

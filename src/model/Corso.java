@@ -18,11 +18,13 @@ public class Corso {
 
     private Integer durataInMesi;
 
+    //FetchType Eager il docente lo voglio subito
     @ManyToOne
     private Docente docente;
 
-    @ManyToMany(mappedBy = "corso")
-    private List<Allievo> allievoList;
+    //FetchType Eager gli allievi li voglio subito
+    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "corso")
+    private List<Allievo> allievoList = new java.util.ArrayList<>();
 
     public Corso(){
 

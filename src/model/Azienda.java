@@ -1,9 +1,6 @@
 package model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
@@ -17,17 +14,15 @@ public class Azienda {
 
     private String ragioneSociale;
 
-    private String via;
-
-    private Integer numeroCivico;
-
-    private String comune;
-
-    private Integer cap;
-
-    private String provincia;
+    //Fetch Type Eager perche l'indirizzo lo voglio subito, Persist e Remove per Cascade type perche abbiamo una composizione
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    private Indirizzo indirizzo;
 
     private String numeroTelefono;
+
+    public Indirizzo getIndirizzo() {
+        return indirizzo;
+    }
 
     public Azienda(){
 
@@ -57,46 +52,6 @@ public class Azienda {
         this.ragioneSociale = ragioneSociale;
     }
 
-    public String getVia() {
-        return via;
-    }
-
-    public void setVia(String via) {
-        this.via = via;
-    }
-
-    public Integer getNumeroCivico() {
-        return numeroCivico;
-    }
-
-    public void setNumeroCivico(Integer numeroCivico) {
-        this.numeroCivico = numeroCivico;
-    }
-
-    public String getComune() {
-        return comune;
-    }
-
-    public void setComune(String comune) {
-        this.comune = comune;
-    }
-
-    public Integer getCap() {
-        return cap;
-    }
-
-    public void setCap(Integer cap) {
-        this.cap = cap;
-    }
-
-    public String getProvincia() {
-        return provincia;
-    }
-
-    public void setProvincia(String provincia) {
-        this.provincia = provincia;
-    }
-
     public String getNumeroTelefono() {
         return numeroTelefono;
     }
@@ -110,11 +65,15 @@ public class Azienda {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Azienda azienda = (Azienda) o;
-        return Objects.equals(id, azienda.id) && Objects.equals(nome, azienda.nome) && Objects.equals(ragioneSociale, azienda.ragioneSociale) && Objects.equals(via, azienda.via) && Objects.equals(numeroCivico, azienda.numeroCivico) && Objects.equals(comune, azienda.comune) && Objects.equals(cap, azienda.cap) && Objects.equals(provincia, azienda.provincia) && Objects.equals(numeroTelefono, azienda.numeroTelefono);
+        return Objects.equals(id, azienda.id) && Objects.equals(nome, azienda.nome) && Objects.equals(ragioneSociale, azienda.ragioneSociale) && Objects.equals(numeroTelefono, azienda.numeroTelefono);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, nome, ragioneSociale, via, numeroCivico, comune, cap, provincia, numeroTelefono);
+        return Objects.hash(id, nome, ragioneSociale, numeroTelefono);
+    }
+
+    public void setIndirizzo(Indirizzo indirizzo) {
+        this.indirizzo = indirizzo;
     }
 }
